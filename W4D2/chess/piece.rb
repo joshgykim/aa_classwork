@@ -148,8 +148,32 @@ class Queen < Piece
 
 end
 
-class Knight < Piece
+module Stepable 
 
+    def move
+        possible_moves = []
+        self.move_diffs.each do |diff|
+            possible_moves += valid_moves_in_diff(diff[0], diff[1])
+        end 
+        return possible_moves
+    end
+
+    def valid_moves_in_diff(dx, dy)
+        moves = []
+
+        new_row = self.pos[0] + dx
+        new_col = self.pos[1] + dy
+        if (new_row).between?(0, 7) && (new_col).between?(0, 7) 
+            if self.board[new_row][new_col] == NullPiece.instance || self.color != self.board[new_row][new_col].color
+                moves << [new_row, new_col]
+            end
+        end
+        return moves 
+    end
+end
+
+class Knight < Piece
+    include Stepable
     def initialize(color, board, pos)
         super
     end
@@ -158,12 +182,14 @@ class Knight < Piece
         @color
     end
 
-    def move_dirs
+    def move_diffs
+        [[2,1], [2,-1], [-2,1], [-2,-1], [1, 2], [1, -2], [-1, 2], [-1,-2]]
     end
 
 end
 
 class King < Piece
+    include Stepable
 
     def initialize(color, board, pos)
         super
@@ -173,7 +199,8 @@ class King < Piece
         @color
     end
 
-    def move_dirs
+    def move_diffs
+        [[0,1],[1,0],[-1,0],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]
     end
 
 end
@@ -188,7 +215,36 @@ class Pawn < Piece
         @color
     end
 
-    def move_dirs
+    def at_start_row?
+        return true if self.color == :B && self.pos[0] == 1
+        return true if self.color == :W && self.pos[0] == 6 
+        return false
+    end
+
+    def forward_dir
+        [[1, 0],[-1, 0]]
+    end
+
+    def forward_steps
+        # if self.at_start_row? 
+    end
+
+    def moves
+        possible_moves = []
+        all_dirs = self.forward_dir
+        if self.at_start_row?
+            all_dirs << [2, 0] if self.color == :B
+            all_dirs << [-2,0] if self.color == :W
+        end
+        all_dirs.each do |dir|
+            possible_moves += valid_moves_in_dir(dir[0], dir[1])
+        end
+        possible_moves
+    end
+
+    def valid_moves_in_dir(dx, dy)
+
+
     end
 
 end
