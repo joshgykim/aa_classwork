@@ -53,24 +53,33 @@ module Slideable
     end
 
     # returns all moves that the piece can travel to in a GIVEN DIRECTION
-    def grow_unblocked_moves_in_dir(dx, dy) # (0, 1)
+    def grow_unblocked_moves_in_dir(dx, dy)
         possible_moves = []
         multiplier = 1
         blocked = false
+
         until blocked
-            new_row = self.pos[0] + dx * multiplier # 2 + 0 * 1 = 2
-            new_col = self.pos[1] + dy * multiplier # 0 + 1 * 1 = 1
+            #new position based on our move
+            new_row = self.pos[0] + dx * multiplier
+            new_col = self.pos[1] + dy * multiplier
+
+            # if new position is within the board,
             if new_row.between?(0, 7) && new_col.between?(0, 7)
-                pos = [new_row, new_col]
-                # p self.board[new_row][new_col]
+
+                # if there is no piece
                 if self.board[new_row][new_col] == NullPiece.instance
-                    possible_moves << pos
+                    possible_moves << [new_row, new_col]
+                
+                # if there is a piece that is not the same color as self
                 elsif self.board[new_row][new_col].color != self.color 
-                    possible_moves << pos
+                    possible_moves << [new_row, new_col]
                     blocked = true
+
+                # if it hits its own color
                 else
                     blocked = true
                 end
+
             else 
                 blocked = true
             end 

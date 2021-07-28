@@ -10,42 +10,51 @@ class Board
     end
 
     def populate
+        # black_royal_row = [Rook.new(:B, board, [0, 0],
+        #                    Knight.new(:B, board, [0, 1],
+        #                    Bishop.new(:B, board, [0, 2],
+        #                    Queen.new(:B, board, [0, 3],
+        #                    King.new(:B, board, [0, 4],
+        #                    Bishop.new(:B, board, [0, 5],
+        #                    Knight.new(:B, board, [0, 6],
+        #                    Rook.new(:B, board, [0, 7]]
+
         (0..7).each do |row_i|
             row = []
             (0..7).each do |col_i|
                 if row_i.between?(2, 5)
                     row << NullPiece.instance
                 elsif row_i == 1 
-                    row << Pawn.new(:B, self.board, [row_i, col_i])
+                    row << Pawn.new(:B, board, [row_i, col_i])
                 elsif row_i == 6
-                    row << Pawn.new(:W, self.board, [row_i, col_i])
+                    row << Pawn.new(:W, board, [row_i, col_i])
                 elsif row_i == 0 
                     if col_i == 0 || col_i == 7
-                        row << Rook.new(:B, self.board, [row_i, col_i])
+                        row << Rook.new(:B, board, [row_i, col_i])
                     elsif col_i == 1 || col_i == 6
-                        row << Knight.new(:B, self.board, [row_i, col_i])
+                        row << Knight.new(:B, board, [row_i, col_i])
                     elsif col_i == 2 || col_i == 5 
-                        row << Bishop.new(:B, self.board, [row_i, col_i])
+                        row << Bishop.new(:B, board, [row_i, col_i])
                     elsif col_i == 3 
-                        row << Queen.new(:B, self.board, [row_i, col_i])
+                        row << Queen.new(:B, board, [row_i, col_i])
                     else 
-                        row << King.new(:B, self.board, [row_i, col_i])
+                        row << King.new(:B, board, [row_i, col_i])
                     end
                 elsif row_i == 7 
                      if col_i == 0 || col_i == 7
-                        row << Rook.new(:W, self.board, [row_i, col_i])
+                        row << Rook.new(:W, board, [row_i, col_i])
                     elsif col_i == 1 || col_i == 6
-                        row << Knight.new(:W, self.board, [row_i, col_i])
+                        row << Knight.new(:W, board, [row_i, col_i])
                     elsif col_i == 2 || col_i == 5 
-                        row << Bishop.new(:W, self.board, [row_i, col_i])
+                        row << Bishop.new(:W, board, [row_i, col_i])
                     elsif col_i == 3 
-                        row << Queen.new(:W, self.board, [row_i, col_i])
+                        row << Queen.new(:W, board, [row_i, col_i])
                     else 
-                        row << King.new(:W, self.board, [row_i, col_i])
+                        row << King.new(:W, board, [row_i, col_i])
                     end
                 end
             end
-            self.board << row
+            board << row
         end
     end
 
@@ -76,9 +85,9 @@ end
 
 
 my_board = Board.new
-my_board.move_piece([0,0], [2,0])
-rook = my_board[[2,0]]
-rook.position = [2,0]
-p rook.pos
-p rook.moves
+my_board.move_piece([0,3], [2,3])
+queen = my_board[[2,3]]
+queen.position = [2,3]
+p queen.pos
+p queen.moves
 
