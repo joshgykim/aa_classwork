@@ -73,21 +73,20 @@ class Board
             raise "The piece cannot be placed here."
         else
             self[end_pos], self[start_pos] = self[start_pos], NullPiece.instance
+            self[end_pos].position = end_pos
         end
     end
 
-    # def print
-    #     board.each do |row| 
-    #         p row.join(" ")
-    #     end
-    # end
+    def print
+        board.each do |row| 
+            p row
+        end
+    end
 end
 
 
-my_board = Board.new
-my_board.move_piece([0,3], [2,3])
-queen = my_board[[2,3]]
-queen.position = [2,3]
-p queen.pos
-p queen.moves
+# my_board = Board.new
+# my_board.move_piece([0,3], [2,3])
+# queen = my_board[[2,3]]
+# my_board.print
 

@@ -11,7 +11,7 @@ class Piece
     end
 
     def inspect
-        "#{self.class}[0]"
+        "#{self.class.to_s[0]}"
     end
 
     def position=(position)
@@ -230,12 +230,15 @@ class Pawn < Piece
     end
 
     def moves
-        possible_moves = []
-        all_dirs = self.forward_dir
+        possible_moves = self.side_attack
+
+        all_dirs = self.forward_dir # [[1, 0],[-1, 0], [2,0]]
+
         if self.at_start_row?
             all_dirs << [2, 0] if self.color == :B
-            all_dirs << [-2,0] if self.color == :W
+            all_dirs << [-2, 0] if self.color == :W
         end
+        
         all_dirs.each do |dir|
             possible_moves += valid_moves_in_dir(dir[0], dir[1])
         end
@@ -243,8 +246,53 @@ class Pawn < Piece
     end
 
     def valid_moves_in_dir(dx, dy)
+        valid_moves = []
 
+        new_row = self.pos[0] + dx
+        new_col = self.pos[1] + dy
 
+        if self.color == :B
+            if self.board[new_row][new_col] == NullPiece.instance
+                if dx == 2 && self.board[new_row-1][new_col] == NullPiece.instance
+                    valid_moves << [new_row, new_col]
+                elsif dx == 1 || dx == -1
+                    valid_moves << [new_row, new_col]
+                end
+            end
+        elsif self.color == :W
+            if self.board[new_row][new_col] == NullPiece.instance
+                if dx == -2 && self.board[new_row+1][new_col] == NullPiece.instance
+                    p self.board[new_row+1][new_col]
+                    valid_moves << [new_row, new_col]
+                elsif dx == 1 || dx == -1
+                    valid_moves << [new_row, new_col]
+                end
+            end
+        end
+
+        valid_moves
+    end
+
+    def side_attack
+        moves = []
+
+        row = self.pos[0]
+        col = self.pos[1]
+
+        if self.color == :B
+            if self.board[row+1][col+1].color == :W
+                moves << [row+1, col+1]
+            elsif self.board[row+1][col-1].color == :W
+                moves << [row+1, col-1]
+            end
+        else
+            if self.board[row-1][col+1].color == :B
+                moves << [row-1, col+1]
+            elsif self.board[row-1][col-1].color == :B
+                moves << [row-1, col-1]
+            end
+        end
+        moves
     end
 
 end
