@@ -20,8 +20,6 @@ class Piece
 
 end
 
-
-
 module Slideable
     HORIZONTAL_DIRS = [[0,1],[1,0],[-1,0],[0,-1]]
     DIAGONAL_DIRS = [[1,1],[1,-1],[-1,1],[-1,-1]]
@@ -87,11 +85,6 @@ module Slideable
         end
         possible_moves
     end
-
-    def movable
-
-    end
-
 end
 
 class Rook < Piece
