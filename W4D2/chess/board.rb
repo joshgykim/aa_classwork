@@ -9,13 +9,45 @@ class Board
     end
 
     def start_board
-        board = Array.new(8) { Array.new(8) { "P" } }
-        board.each_with_index do |row, i|
-            if i > 1 && i < 6
-                row.map! { |ele| ele = "_" } 
+        board = []
+        (0..7).each do |row_i|
+            row = []
+            (0..7).each do |col_i|
+                if row_i.between?(2, 5)
+                    row << NullPiece.instance
+                elsif row_i == 1 
+                    row << Pawn.new(:B, self.board, [row_i, col_i])
+                elsif row_i == 6
+                    row << Pawn.new(:W, self.board, [row_i, col_i])
+                elsif row_i == 0 
+                    if col_i == 0 || col_i == 7
+                        row << Rook.new(:B, self.board, [row_i, col_i])
+                    elsif col_i == 1 || col_i == 6
+                        row << Knight.new(:B, self.board, [row_i, col_i])
+                    elsif col_i == 2 || col_i == 5 
+                        row << Bishop.new(:B, self.board, [row_i, col_i])
+                    elsif col_i == 3 
+                        row << Queen.new(:B, self.board, [row_i, col_i])
+                    else 
+                        row << King.new(:B, self.board, [row_i, col_i])
+                    end
+                elsif row_i == 7 
+                     if col_i == 0 || col_i == 7
+                        row << Rook.new(:W, self.board, [row_i, col_i])
+                    elsif col_i == 1 || col_i == 6
+                        row << Knight.new(:W, self.board, [row_i, col_i])
+                    elsif col_i == 2 || col_i == 5 
+                        row << Bishop.new(:W, self.board, [row_i, col_i])
+                    elsif col_i == 3 
+                        row << Queen.new(:W, self.board, [row_i, col_i])
+                    else 
+                        row << King.new(:W, self.board, [row_i, col_i])
+                    end
+                end
             end
+            board << row
         end
-        board
+        return board
     end
 
     def [](pos)
@@ -27,12 +59,12 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        if self[start_pos] == "_"
+        if self[start_pos] == NullPiece.instance
             raise "There is no piece here."
-        elsif !self[end_pos] == "_"
+        elsif !self[end_pos] == NullPiece.instance
             raise "The piece cannot be placed here."
         else
-            self[end_pos], self[start_pos] = self[start_pos], "_"
+            self[end_pos], self[start_pos] = self[start_pos], NullPiece.instance
         end
     end
 

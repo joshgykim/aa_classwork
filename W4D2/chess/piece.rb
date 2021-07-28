@@ -41,16 +41,31 @@ module Slideable
         raise "Subclass method did not override!"
     end
 
-    # returns all positions that the piece can travel to in a GIVEN DIRECTION
+    # returns all moves that the piece can travel to in a GIVEN DIRECTION
     def grow_unblocked_moves_in_dir(dx, dy)
-        possible_positions = []
-
+        possible_moves = []
         multiplier = 1
-
+        blocked = false
         until blocked
             new_row = self.pos[0] + dx * multiplier
-            new_col = self.pos[0] + dx * multiplier
-            board.
+            new_col = self.pos[1] + dy * multiplier
+            if new_row.between?(0, 7) && new_col.between?(0, 7)
+                pos = [new_row, new_col]
+                if self.board[pos].class == NullPiece
+                    possible_moves << pos
+                elsif self.board[pos].color != self.color 
+                    possible_moves << pos
+                    blocked = true
+                end
+            else 
+                blocked = true
+            end 
+            multiplier += 1
+        end
+        possible_moves
+    end
+
+    def movable
 
     end
 
