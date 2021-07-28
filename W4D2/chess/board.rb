@@ -5,11 +5,11 @@ class Board
     attr_reader :board
 
     def initialize
-        @board = start_board
+        @board = []
+        self.populate
     end
 
-    def start_board
-        board = []
+    def populate
         (0..7).each do |row_i|
             row = []
             (0..7).each do |col_i|
@@ -45,9 +45,8 @@ class Board
                     end
                 end
             end
-            board << row
+            self.board << row
         end
-        return board
     end
 
     def [](pos)
@@ -68,18 +67,18 @@ class Board
         end
     end
 
-    def print
-        board.each do |row| 
-            p row.join(" ")
-        end
-    end
+    # def print
+    #     board.each do |row| 
+    #         p row.join(" ")
+    #     end
+    # end
 end
 
 
-board = Board.new
-# p board 
-# board.move_piece([1,0], [3,0])
-# p board
-board.print
-board.move_piece([1,0], [3,0])
-board.print
+my_board = Board.new
+my_board.move_piece([0,0], [2,0])
+rook = my_board[[2,0]]
+rook.position = [2,0]
+p rook.pos
+p rook.moves
+

@@ -1,4 +1,8 @@
+require "singleton"
+
 class Piece
+
+    attr_reader :color, :board, :pos
 
     def initialize(color, board, pos)
         @color = color
@@ -7,7 +11,11 @@ class Piece
     end
 
     def inspect
-        "P"
+        "#{self.class}[0]"
+    end
+
+    def position=(position)
+        @pos = position
     end
 
 end
@@ -31,8 +39,11 @@ module Slideable
         dirs = self.move_dirs
 
         dirs.each do |dir|
+            p dir
             possible_moves = self.grow_unblocked_moves_in_dir(dir[0], dir[1])
             moves += possible_moves
+            p moves
+            puts
         end
         moves
     end
@@ -42,19 +53,22 @@ module Slideable
     end
 
     # returns all moves that the piece can travel to in a GIVEN DIRECTION
-    def grow_unblocked_moves_in_dir(dx, dy)
+    def grow_unblocked_moves_in_dir(dx, dy) # (0, 1)
         possible_moves = []
         multiplier = 1
         blocked = false
         until blocked
-            new_row = self.pos[0] + dx * multiplier
-            new_col = self.pos[1] + dy * multiplier
+            new_row = self.pos[0] + dx * multiplier # 2 + 0 * 1 = 2
+            new_col = self.pos[1] + dy * multiplier # 0 + 1 * 1 = 1
             if new_row.between?(0, 7) && new_col.between?(0, 7)
                 pos = [new_row, new_col]
-                if self.board[pos].class == NullPiece
+                # p self.board[new_row][new_col]
+                if self.board[new_row][new_col] == NullPiece.instance
                     possible_moves << pos
-                elsif self.board[pos].color != self.color 
+                elsif self.board[new_row][new_col].color != self.color 
                     possible_moves << pos
+                    blocked = true
+                else
                     blocked = true
                 end
             else 
@@ -125,33 +139,34 @@ class Queen < Piece
 
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Steppers < Piece
+class Knight < Piece
 
     def initialize(color, board, pos)
         super
     end
+
+    def symbol
+        @color
+    end
+
+    def move_dirs
+    end
+
+end
+
+class King < Piece
+
+    def initialize(color, board, pos)
+        super
+    end
+
+    def symbol
+        @color
+    end
+
+    def move_dirs
+    end
+
 end
 
 class Pawn < Piece
@@ -159,11 +174,20 @@ class Pawn < Piece
     def initialize(color, board, pos)
         super
     end
+
+    def symbol
+        @color
+    end
+
+    def move_dirs
+    end
+
 end
 
 class NullPiece < Piece
+    include Singleton
 
-    def initialize(color, board, pos)
-        super
+    def initialize
     end
+
 end
