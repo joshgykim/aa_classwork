@@ -35,10 +35,24 @@ end
 
 # PHASE 4
 class BestFriend
-  def initialize(name, yrs_known, fav_pastime)
+  def initialize(name, yrs_known, fav_pastime)  
+    valid_arguements?(name, yrs_known, fav_pastime)
     @name = name
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
+  end
+
+  def valid_arguements?(name, yrs_known, fav_pastime)
+    if name.length == 0 
+      puts "You don't have a name."
+      raise NoNameError.new("You don't have a name.")
+    elsif yrs_known < 5
+      puts "We've only been friends for less than 5 years!"
+      raise YearsKnownError.new("We've only been friends for less than 5 years!") 
+    elsif fav_pastime.length == 0
+      puts "No favorite pastime?"
+      raise FavPastimeError.new("No favorite pastime?")
+    end
   end
 
   def talk_about_friendship
