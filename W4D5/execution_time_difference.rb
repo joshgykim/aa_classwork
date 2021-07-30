@@ -50,3 +50,32 @@ def largest_contiguous_sub_sum1(arr)
 end
 
 p largest_contiguous_sub_sum1(list)
+
+# PHASE 2
+
+def largest_contiguous_sub_sum2(arr)
+    #one varable tracks largest sum
+    #one variable tracks current sum
+    #O(n) + O(1)
+
+    largest_sum= arr.first
+    arr.each_with_index do |ele, idx|
+        if ele > largest_sum
+            largest_sum = ele
+        end
+        i = idx
+        sum = ele
+        while i < arr.length-1
+            if sum <= sum + arr[i+1]
+                sum = sum + arr[i+1]
+                largest_sum = sum
+                i+=1
+            else 
+                break
+            end
+        end
+    end
+    largest_sum
+end
+
+p largest_contiguous_sub_sum2(list)
