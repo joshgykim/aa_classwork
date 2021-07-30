@@ -69,10 +69,9 @@ def largest_contiguous_sub_sum2(arr)
             if sum <= sum + arr[i+1]
                 sum = sum + arr[i+1]
                 largest_sum = sum
-                i+=1
-            else 
-                break
+               
             end
+            i+=1
         end
     end
     largest_sum
