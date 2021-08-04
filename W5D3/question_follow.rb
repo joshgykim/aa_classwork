@@ -1,4 +1,6 @@
 require_relative "questions_db.rb"
+require_relative "user.rb"
+require_relative "question.rb"
 
 class QuestionFollow
   attr_accessor :id, :question_id, :author_id
@@ -11,7 +13,7 @@ class QuestionFollow
   def initialize(options)
     @id = options["id"]
     @question_id = options["question_id"]
-    @author_id = options["author_id"]
+    @follower_id = options["follower_id"]
   end
 
   def self.find_by_id(id)
@@ -26,6 +28,42 @@ class QuestionFollow
     return nil unless follow.length > 0
 
     QuestionFollow.new(follow.first)
+  end
+
+  def self.followers_for_question_id(question_id)
+    followers = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT
+        users.id, users.f_name, users.l_name
+      FROM
+        users
+      JOIN
+        question_follows ON users.id = question_follows.follower_id
+      JOIN
+        questions ON questions.id = question_follows.question_id
+      WHERE
+        questions.id = ?
+    SQL
+    return nil unless followers.length > 0
+
+    followers.map { |f| User.new(f) }
+  end
+
+  def self.followed_questions_for_follower_id(follower_id)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, follower_id)
+      SELECT
+        questions.id, questions.title, questions.body, questions.author_id
+      FROM
+        questions
+      JOIN
+        question_follows ON questions.id = question_follows.question_id
+      JOIN
+        users ON users.id = question_follows.follower_id
+      WHERE
+        question_follows.follower_id = ?
+    SQL
+    return nil unless questions.length > 0
+
+    questions.map { |q| Question.new(q) }
   end
 
 end

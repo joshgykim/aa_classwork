@@ -18,10 +18,10 @@ CREATE TABLE questions (
 CREATE TABLE question_follows (
     id INTEGER PRIMARY KEY,
     question_id INTEGER NOT NULL,
-    author_id INTEGER NOT NULL,
+    follower_id INTEGER NOT NULL,
 
     FOREIGN KEY (question_id) REFERENCES questions(id),
-    FOREIGN KEY (author_id) REFERENCES users(id)
+    FOREIGN KEY (follower_id) REFERENCES users(id)
 );
 
 CREATE TABLE replies (
@@ -63,13 +63,22 @@ VALUES
 
 
 INSERT INTO
-    question_follows (question_id, author_id)
+    question_follows (question_id, follower_id)
 VALUES
     ((SELECT id FROM questions WHERE title = 'Nth Steps'),
      (SELECT id FROM users WHERE f_name = 'Vincent')),
+
+    ((SELECT id FROM questions WHERE title = 'Nth Steps'),
+     (SELECT id FROM users WHERE f_name = 'Josh')),
+
+    ((SELECT id FROM questions WHERE title = 'Nth Steps'),
+     (SELECT id FROM users WHERE f_name = 'Jimmy')),
     
     ((SELECT id FROM questions WHERE title = 'Problematic Array'),
-     (SELECT id FROM users WHERE f_name = 'Josh'));
+     (SELECT id FROM users WHERE f_name = 'Josh')),
+     
+    ((SELECT id FROM questions WHERE title = 'Problematic Array'),
+     (SELECT id FROM users WHERE f_name = 'Jimmy'));
 
 
 INSERT INTO
