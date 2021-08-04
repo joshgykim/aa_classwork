@@ -78,8 +78,12 @@ VALUES
     ('Try fibonacci!',
     NULL,
     (SELECT id FROM questions WHERE title = 'Nth Steps'),
-    (SELECT id FROM users WHERE f_name = 'Josh' AND l_name = 'Kim-Biggs')),
+    (SELECT id FROM users WHERE f_name = 'Josh' AND l_name = 'Kim-Biggs'));
 
+
+INSERT INTO
+    replies (body, parent_id, question_id, replier_id)
+  VALUES
     ('Why would that work?',
     (SELECT id FROM replies WHERE body = 'Try fibonacci!'),
     (SELECT id FROM questions WHERE title = 'Nth Steps'),
@@ -89,5 +93,5 @@ VALUES
 INSERT INTO
     question_likes (liker_id, question_id)
 VALUES
-    ((SELECT id FROM users WHERE f_name = 'Jimmy'),
+    ((SELECT id FROM users WHERE f_name = 'Jimmy' AND l_name = 'Kuang'),
      (SELECT id FROM questions WHERE title = 'Problematic Array'));
