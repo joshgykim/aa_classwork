@@ -28,5 +28,4 @@ class QuestionLike
     QuestionLike.new(like.first)
   end
 
-
 end
