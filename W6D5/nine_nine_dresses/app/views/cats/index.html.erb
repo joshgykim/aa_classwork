@@ -1,0 +1,8 @@
+<h1>List of all Cats</h1>
+
+<ul>
+  <% @cats.each do |cat| %>
+  <%= render 'cat', cat: cat, action: 'show' %>
+  <br>
+  <% end %>
+</ul>

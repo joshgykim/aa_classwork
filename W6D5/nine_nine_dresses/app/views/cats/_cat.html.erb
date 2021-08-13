@@ -1,0 +1,12 @@
+
+<li><%= cat.name%></li>
+<li><%= cat.color%></li>
+<li><%= cat.birth_date%></li>
+<li><%= cat.description%></li>
+<li><%= cat.sex%></li>
+
+<% if action == 'show' %>
+  <li><a href='<%= cat_url(cat) %>'>Cat's Picture</a></li>
+<% elsif action == 'index' %>
+  <li><a href='<%= cats_url %>'>Cat's Picture</a></li>
+<% end %>
