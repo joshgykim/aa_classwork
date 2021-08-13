@@ -1,5 +1,23 @@
-<h1>cat at this index</h1>
-
-<ul> 
-  <%= render 'cat', cat: @cat, action: 'index' %>
-</ul>
+<h2><%= @cat.name %></h2>
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td><%= @cat.age %></td>
+  </tr>
+  <tr>
+    <td>Birth_Date</td>
+    <td><%= @cat.birth_date %></td>
+  </tr>
+  <tr>
+    <td>Color</td>
+    <td><%= @cat.color %></td>
+  </tr>
+  <tr>
+    <td>Sex</td>
+    <td><%= @cat.sex %></td>
+  </tr>
+</table>
