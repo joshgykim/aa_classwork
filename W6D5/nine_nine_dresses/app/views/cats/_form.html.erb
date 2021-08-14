@@ -1,0 +1,42 @@
+<% if action == :new %>
+  <% url = cats_url %>
+<% elsif action == :edit %>
+  <% url = cat_url(cat) %>
+<% end%>
+
+
+<form action="<%= url %>" method="POST">
+    <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+    <% end %>
+
+    <label for="name">Name: </label>
+    <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+    <br>
+
+    <label>Sex: </label>
+    <input id="sex_choice1" <%= cat.sex == "M" ? "checked" : "" %> type="radio" name="cat[sex]" value="M">
+    <label for="sex_choice1">M</label>
+    <input id="sex_choice2" <%= cat.sex == "F" ? "checked" : "" %> type="radio" name="cat[sex]" value="F">
+    <label for="sex_choice2">F</label>
+    <br>
+
+    <label for="color">Color: </label>
+    <select id="color" name="cat[color]">
+        <option value="-- select a color --" disabled="true" <%= cat.color ? "" : "selected" %>>-- select a color --</option>
+        <option value="White" <%= cat.color == "White" ? "selected" : "" %>>White</option>
+        <option value="Black" <%= cat.color == "Black" ? "selected" : "" %>>Black</option>
+        <option value="Orange" <%= cat.color == "Orange" ? "selected" : "" %>>Orange</option>
+        <option value="Brown" <%= cat.color == "Brown" ? "selected" : "" %>>Brown</option>
+    </select>
+    <br>
+
+    <label for="birth_date">Birth Date: </label>
+    <input id="birth_date" type="date" name="cat[birth_date]" value="<%= cat.birth_date %>">
+    <br>
+
+    <label for="description">Description: </label>
+    <input id="description" type="textarea" name="cat[description]" value="<%= cat.description %>">
+
+    <input type="submit" value=<%= action == :edit ? "EditCat" : "CreateCat" %>>
+</form>
