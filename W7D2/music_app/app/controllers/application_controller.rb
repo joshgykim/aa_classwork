@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
+    protect_from_forgery with: :exception
     # CRRLLL
+    helper_method :current_user, :logged_in?
 
     def current_user
-        @current_user ||= User.find_by(session: session[:session_token])
+        @current_user ||= User.find_by(session_token: session[:session_token])
     end
 
     def require_logged_in
@@ -10,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_logged_out
-        #redirect_to homepage if logged_in?
+        redirect_to users_url if logged_in?
     end
 
     def login(user)
@@ -18,10 +20,10 @@ class ApplicationController < ActionController::Base
     end
 
     def logged_in?
-        !!@current_user
+        !!current_user
     end
 
-    def logout
+    def logout!
         @current_user.reset_session_token! if logged_in?
         session[:session_token] = nil
         @current_user = nil

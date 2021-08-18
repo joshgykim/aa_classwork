@@ -1,4 +1,16 @@
+<% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+    <% end%>
+<% end %>
+<br>
+
 <form action="<%= users_url %>" method="POST">
+    <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+    
     <label for="email">Email: </label>
     <input id="email" type="text" name="user[email]" value="<%= @user.email %>">
     <br>
