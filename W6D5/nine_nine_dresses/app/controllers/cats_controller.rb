@@ -10,7 +10,7 @@ class CatsController < ApplicationController
     if @cat
       render :show
     else
-      render json: { error: "There is no cat by that ID"}, status: 404
+      b, status: 404
     end
   end
 
