@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
   #Associations
 
   #Methods
-  describe "user find credentials" do 
+  describe "::find_by_credentials" do 
     it "find user with username and password" do 
       minh = FactoryBot.create(:user, username: 'minh')
       expect(User.find_by_credential("minh", "password")).to eq(minh) 
@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "password= password" do 
+  describe "#password= password" do 
     it "create password_digest and set @password to password" do 
       josh = FactoryBot.create(:user, password: 'helloworld', username: 'josh')
       expect(josh.password_digest).not_to eq(nil)
@@ -33,9 +33,29 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#is_password?(password)" do
+    it "return boolean whether the argument password is the user's password" do
+      minh = FactoryBot.create(:user, username: 'minh', password: "helloworld")
+      expect(minh.is_password?("helloworld")).to eq(true)
+      expect(minh.is_password?("helloworl")).to eq(false)
+    end
+  end
 
+  describe "#reset_session_token!" do
+    it "resets the user's session_token and returns it" do
+      josh = FactoryBot.create(:user, password: 'helloworld', username: 'josh')
+      old_session_token = josh.session_token
+      josh.reset_session_token!
+      expect(old_session_token).not_to eq(josh.session_token)
+      expect(josh.session_token).not_to eq(nil)
+    end
+  end
 
-
-
+  describe "#ensure_session_token" do
+    it "ensures user has session token upon initialization" do
+      josh = FactoryBot.create(:user, password: 'helloworld', username: 'josh')
+      expect(josh.session_token).not_to eq(nil)
+    end
+  end
 
 end
