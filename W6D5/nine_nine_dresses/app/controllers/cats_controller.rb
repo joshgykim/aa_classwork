@@ -34,6 +34,12 @@ class CatsController < ApplicationController
   end
 
   def update
+    @cat = Cat.find_by(id: params[:id])
+    if @cat.update_attributes(cat_params)
+      redirect_to cat_url(@cat)
+    else
+      render :edit
+    end
   end
 
   private
