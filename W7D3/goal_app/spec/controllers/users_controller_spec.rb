@@ -39,7 +39,8 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to(users_url)
       end
     end
-
   end
+
+  
 
 end
