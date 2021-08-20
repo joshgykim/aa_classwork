@@ -1,14 +1,5 @@
-<h1><%= @sub.title %></h1>
-
-<h2>Description: </h2>
-
-<h3><%= @sub.description %></h3>
-
-<h3>Created by: <%= @sub.moderator.username %></h3>
-
 <h1>Create Post in <%= @sub.title %></h1>
 
-<!--
 <form action="<%= sub_posts_url %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <label>Title:
@@ -22,6 +13,6 @@
     <label>Content:
         <textarea name="post[content]"></textarea>
     </label>
+
     <input type="submit" value="Create post">
 </form>
--->

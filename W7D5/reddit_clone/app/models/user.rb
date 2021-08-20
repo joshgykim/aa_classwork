@@ -19,7 +19,17 @@ class User < ApplicationRecord
 
     has_many :subs,
         foreign_key: :moderator_id,
-        class_name: :Sub
+        class_name: :Sub,
+        dependent: :destroy
+
+    has_many :posts,
+        foreign_key: :author_id,
+        class_name: :Post,
+        dependent: :destroy
+    
+    has_many :subs_posted,
+        through: :posts,
+        source: :sub
 
     # SPIRE
 
