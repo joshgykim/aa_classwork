@@ -1,0 +1,26 @@
+/* PHASE 2: Thumbs */
+
+.profile-friends-thumb > ul {
+    height: 200px;
+    margin-top: 15px;
+}
+
+.profile-friends-thumb li {
+    float: left;
+    width: 31%;
+    height: 31%;
+    margin: 2px;
+}
+
+.profile-friends-thumb a {
+    display: inline-block;
+    margin: 2.5% 2.5%;
+    padding: 0px;
+}
+
+.profile-friends-thumb img {
+    border: 1px solid #000;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
