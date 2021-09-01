@@ -5,17 +5,9 @@
 /*!***********************************!*\
   !*** ./frontend/follow_toggle.js ***!
   \***********************************/
-/***/ ((module) => {
+/***/ (() => {
 
-class FollowToggle {
-    constructor (el) {
-        this.userId = this.el.data("user-id");
-        this.followState = this.el.data("initial-follow-state");
-        this.$el = $(el);
-    }
-}
-
-module.exports = FollowToggle;
+throw new Error("Module parse failed: Unexpected token (26:16)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n|             method: (this.followState === \"followed\") ? (\"delete\") : (\"post\"),\n|             data: {\n>                 {}\n|             },\n|             dataType:");
 
 /***/ })
 
@@ -53,6 +45,11 @@ var __webpack_exports__ = {};
   !*** ./frontend/twitter.js ***!
   \*****************************/
 const FollowToggle = __webpack_require__(/*! ./follow_toggle */ "./frontend/follow_toggle.js");
+
+
+$(function (){
+  $("button.follow-toggle").each((idx, btn) => { new FollowToggle(btn) });
+});
 })();
 
 /******/ })()
