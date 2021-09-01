@@ -19,13 +19,18 @@ class FollowToggle { // object information such as was it clicked, who clicked i
     handleClick(e) {
         e.preventDefault();
 
+        console.log()
+
         $.ajax({
             url: `/users/${this.userId}/follow`,
             method: (this.followState === "followed") ? ("delete") : ("post"),
-            data: {
-                {}
-            },
-            dataType:
+            data: { user_id: this.userId },
+            dataType: "JSON"
+        }).then(() => {
+            // console.log("Success!");
+            this.followState = (this.followState === "unfollowed") ? ("followed") : ("unfollowed");
+            this.$el.text(this.render());
+            // console.log(this);
         })
     }
 }
