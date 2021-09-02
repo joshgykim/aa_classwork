@@ -1,3 +1,5 @@
+const APIUtil = require("./api_util");
+
 class FollowToggle { // object information such as was it clicked, who clicked it --> t/f
     constructor(el) { // el is the button, we add these to each button
         this.$el = $(el);
@@ -10,28 +12,46 @@ class FollowToggle { // object information such as was it clicked, who clicked i
 
     render() {
         if (this.followState === "unfollowed") {
+            this.$el.prop("disabled", "true")
             return "follow";
-        } else {
+        } else if (this.followState === "followed") {
+            this.$el.prop("disabled", "true")
             return "unfollow";
+        } else {
+            this.$el.prop("disabled", "false")
+            return
         }
     }
 
     handleClick(e) {
         e.preventDefault();
 
-        console.log()
+        if (this.followState === "unfollowed") {
+            const promise = APIUtil.followUser(this.userId);
 
-        $.ajax({
-            url: `/users/${this.userId}/follow`,
-            method: (this.followState === "followed") ? ("delete") : ("post"),
-            data: { user_id: this.userId },
-            dataType: "JSON"
-        }).then(() => {
-            // console.log("Success!");
-            this.followState = (this.followState === "unfollowed") ? ("followed") : ("unfollowed");
-            this.$el.text(this.render());
-            // console.log(this);
-        })
+            promise.then(() => {
+                this.followState = "followed";
+                this.$el.text(this.render());
+            })
+        } else {
+            const promise = APIUtil.unfollowUser(this.userId);
+            promise.then(() => {
+                this.followState = "unfollowed";
+                this.$el.text(this.render());
+            })
+        }
+
+        // $.ajax({
+        //     url: `/users/${this.userId}/follow`,
+        //     method: (this.followState === "followed") ? ("delete") : ("post"),
+        //     data: { user_id: this.userId },
+        //     dataType: "JSON"
+        // }).then(() => {
+        //     // console.log("Success!");
+        //     this.followState = (this.followState === "unfollowed") ? ("followed") : ("unfollowed");
+        //     this.$el.text(this.render());
+        //     // console.log(this);
+        // })
     }
 }
 

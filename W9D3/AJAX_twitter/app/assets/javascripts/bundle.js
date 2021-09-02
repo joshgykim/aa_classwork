@@ -1,11 +1,52 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./frontend/api_util.js":
+/*!******************************!*\
+  !*** ./frontend/api_util.js ***!
+  \******************************/
+/***/ ((module) => {
+
+// constructor(el) { // el is the button, we add these to each button
+//   this.$el = $(el);
+//   this.userId = this.$el.data("user-id");
+//   this.followState = this.$el.data("initial-follow-state");
+
+//   this.$el.text(this.render());
+//   this.$el.on("click", this.handleClick.bind(this));
+// }
+
+const APIUtil = {
+  followUser: id => {
+    $.ajax({
+      url: `/users/${id}/follow`,
+      method: "post",
+      data: { user_id: id },
+      dataType: "JSON"
+    })
+  },
+
+  unfollowUser: id => {
+    $.ajax({
+      url: `/users/${id}/follow`,
+      method: "delete",
+      data: { user_id: id },
+      dataType: "JSON"
+    })
+  }
+};
+
+module.exports = APIUtil;
+
+/***/ }),
+
 /***/ "./frontend/follow_toggle.js":
 /*!***********************************!*\
   !*** ./frontend/follow_toggle.js ***!
   \***********************************/
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const APIUtil = __webpack_require__(/*! ./api_util */ "./frontend/api_util.js");
 
 class FollowToggle { // object information such as was it clicked, who clicked it --> t/f
     constructor(el) { // el is the button, we add these to each button
@@ -19,28 +60,46 @@ class FollowToggle { // object information such as was it clicked, who clicked i
 
     render() {
         if (this.followState === "unfollowed") {
+            this.$el.prop("disabled", "true")
             return "follow";
-        } else {
+        } else if (this.followState === "followed") {
+            this.$el.prop("disabled", "true")
             return "unfollow";
+        } else {
+            this.$el.prop("disabled", "false")
+            return
         }
     }
 
     handleClick(e) {
         e.preventDefault();
 
-        console.log()
+        if (this.followState === "unfollowed") {
+            const promise = APIUtil.followUser(this.userId);
 
-        $.ajax({
-            url: `/users/${this.userId}/follow`,
-            method: (this.followState === "followed") ? ("delete") : ("post"),
-            data: { user_id: this.userId },
-            dataType: "JSON"
-        }).then(() => {
-            // console.log("Success!");
-            this.followState = (this.followState === "unfollowed") ? ("followed") : ("unfollowed");
-            this.$el.text(this.render());
-            // console.log(this);
-        })
+            promise.then(() => {
+                this.followState = "followed";
+                this.$el.text(this.render());
+            })
+        } else {
+            const promise = APIUtil.unfollowUser(this.userId);
+            promise.then(() => {
+                this.followState = "unfollowed";
+                this.$el.text(this.render());
+            })
+        }
+
+        // $.ajax({
+        //     url: `/users/${this.userId}/follow`,
+        //     method: (this.followState === "followed") ? ("delete") : ("post"),
+        //     data: { user_id: this.userId },
+        //     dataType: "JSON"
+        // }).then(() => {
+        //     // console.log("Success!");
+        //     this.followState = (this.followState === "unfollowed") ? ("followed") : ("unfollowed");
+        //     this.$el.text(this.render());
+        //     // console.log(this);
+        // })
     }
 }
 
