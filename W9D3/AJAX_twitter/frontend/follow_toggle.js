@@ -11,35 +11,62 @@ class FollowToggle { // object information such as was it clicked, who clicked i
     }
 
     render() {
+        console.log(this.followState)
+        // debugger
         if (this.followState === "unfollowed") {
-            this.$el.prop("disabled", "true")
+            this.$el.prop("disabled", false);
+
             return "follow";
         } else if (this.followState === "followed") {
-            this.$el.prop("disabled", "true")
+            this.$el.prop("disabled", false);
             return "unfollow";
         } else {
-            this.$el.prop("disabled", "false")
-            return
+            this.$el.prop("disabled", true);
+            return;
         }
+
+
+
     }
 
     handleClick(e) {
         e.preventDefault();
 
-        if (this.followState === "unfollowed") {
-            const promise = APIUtil.followUser(this.userId);
 
-            promise.then(() => {
-                this.followState = "followed";
-                this.$el.text(this.render());
-            })
-        } else {
-            const promise = APIUtil.unfollowUser(this.userId);
-            promise.then(() => {
+        if (this.followState === "followed") {
+            this.followState = "unfollowing";
+            this.render();
+
+
+            APIUtil.unfollowUser(this.userId).then(() => {
                 this.followState = "unfollowed";
                 this.$el.text(this.render());
-            })
+            });
+        } else {
+            this.followState = "following";
+            this.render();
+            APIUtil.followUser(this.userId).then(() => {
+                this.followState = "followed";
+                this.$el.text(this.render());
+            });
         }
+
+        // if (this.followState === "unfollowed") {
+
+
+            // const promise = APIUtil.followUser(this.userId);
+
+            // promise.then(() => {
+            //     this.followState = "followed";
+            //     this.$el.text(this.render());
+            // });
+        // } else {
+            // const promise = APIUtil.unfollowUser(this.userId);
+            // promise.then(() => {
+            //     this.followState = "unfollowed";
+            //     this.$el.text(this.render());
+            // });
+        // }
 
         // $.ajax({
         //     url: `/users/${this.userId}/follow`,
