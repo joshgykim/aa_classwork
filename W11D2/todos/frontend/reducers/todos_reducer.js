@@ -1,7 +1,6 @@
 import { RECEIVE_TODO } from "../actions/todo_actions";
 import { RECEIVE_TODOS } from "../actions/todo_actions";
 
-
 const todosReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
     const newState = Object.assign({}, oldState) 
@@ -10,7 +9,11 @@ const todosReducer = (oldState = {}, action) => {
             action.todos.forEach((todo) => {
                 newState[todo.id] = todo
             }); 
-            return newState; 
+            return newState;
+
+        case RECEIVE_TODO:
+            newState[action.todo.id] = action.todo;
+            return newState;
 
         default: 
         return oldState; 

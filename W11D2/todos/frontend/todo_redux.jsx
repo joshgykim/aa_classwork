@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from "./store/store"
+import {receiveTodos, receiveTodo} from "./actions/todo_actions"
 
 function Content() {
   return (
@@ -12,6 +13,8 @@ function Content() {
 
 document.addEventListener("DOMContentLoaded", () => {
   const store = configureStore();
+  window.receiveTodos = receiveTodos;
+  window.receiveTodo = receiveTodo;
   window.store = store;
 
   const content = document.getElementById("content");
