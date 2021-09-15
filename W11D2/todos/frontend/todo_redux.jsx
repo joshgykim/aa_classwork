@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
     todos: {
       1: {
         id: 1,
-        body: 'learn selectors',
-        done: 'done'
+        title: 'Test1',
+        body: 'learn selectors'
       },
       2: {
         id: 2,
-        body: 'look good doing it',
-        done: 'undone'
+        title: 'Test2',
+        body: 'look good doing it'
       }
     }
   };
