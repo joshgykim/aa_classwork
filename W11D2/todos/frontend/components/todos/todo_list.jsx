@@ -9,4 +9,4 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList
+export default () => <h3>Todo List goes here!</h3>; 
