@@ -13,7 +13,7 @@ class TodoList extends React.Component {
       <ul>
         {
           todoArrays.map((todo, index) =>
-          <TodoListItem key={index} todo={todo}/>)
+          <TodoListItem key={index} todo={todo} receiveTodo={this.props.receiveTodo} removeTodo={this.props.removeTodo}/>)
         }
         <TodoForm receiveTodo={this.props.receiveTodo}/>
       </ul>

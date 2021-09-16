@@ -22,12 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
       1: {
         id: 1,
         title: 'Test1',
-        body: 'learn selectors'
+        body: 'learn selectors',
+        done: "undone"
       },
       2: {
         id: 2,
         title: 'Test2',
-        body: 'look good doing it'
+        body: 'look good doing it', 
+        done: "undone"
       }
     }
   };
