@@ -8,7 +8,7 @@ class TodoForm extends React.Component {
       id: uniqueId(),
       title: "",
       body: "",
-      done: "undone"
+      done: false
     }
 
     this.updateTitle = this.updateTitle.bind(this);
@@ -31,7 +31,7 @@ class TodoForm extends React.Component {
       id: uniqueId(),
       title: "",
       body: "",
-      done: "undone"
+      done: false
     })
   }
 

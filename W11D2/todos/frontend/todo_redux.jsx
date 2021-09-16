@@ -17,24 +17,8 @@ function Content() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const seed = {
-    todos: {
-      1: {
-        id: 1,
-        title: 'Test1',
-        body: 'learn selectors',
-        done: "undone"
-      },
-      2: {
-        id: 2,
-        title: 'Test2',
-        body: 'look good doing it', 
-        done: "undone"
-      }
-    }
-  };
 
-  const store = configureStore(seed);
+  const store = configureStore();
   window.receiveTodos = receiveTodos;
   window.receiveTodo = receiveTodo;
   window.removeTodo = removeTodo;
