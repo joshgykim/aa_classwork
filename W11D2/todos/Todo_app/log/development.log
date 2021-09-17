@@ -46,3 +46,336 @@ Migrating to CreateTodoItems (20210916221730)
   [1m[35m (3.2ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTodoItem Create (3.1ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "cook"], ["body", "cook food"], ["done", false], ["created_at", "2021-09-16 22:30:09.346372"], ["updated_at", "2021-09-16 22:30:09.346372"]]
   [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (195.7ms)[0m  [1m[35mCREATE DATABASE "Todo_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (117.1ms)[0m  [1m[35mCREATE DATABASE "Todo_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35mSQL (1.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "todo_items" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (14.1ms)[0m  [1m[35mCREATE TABLE "todo_items" ("id" bigserial primary key, "title" character varying NOT NULL, "body" character varying NOT NULL, "done" boolean NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20210916221730)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-09-16 23:07:43.972069"], ["updated_at", "2021-09-16 23:07:43.972069"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "todo_items" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "todo_items" ("id" bigserial primary key, "title" character varying NOT NULL, "body" character varying NOT NULL, "done" boolean NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20210916221730)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-09-16 23:07:44.027611"], ["updated_at", "2021-09-16 23:07:44.027611"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2021-09-16 23:07:44.030794"], ["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTodoItem Create (1.2ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "test"], ["body", "test"], ["done", false], ["created_at", "2021-09-16 23:09:35.940281"], ["updated_at", "2021-09-16 23:09:35.940281"]]
+  [1m[35m (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mTodoItem Create (0.9ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "TodoItem1"], ["body", "TodoItem1Body"], ["done", false], ["created_at", "2021-09-16 23:36:20.759087"], ["updated_at", "2021-09-16 23:36:20.759087"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (6.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mTodoItem Create (0.4ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "TodoItem2"], ["body", "TodoItem2Body"], ["done", false], ["created_at", "2021-09-16 23:36:20.768293"], ["updated_at", "2021-09-16 23:36:20.768293"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mTodoItem Create (0.3ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "TodoItem3"], ["body", "TodoItem3Body"], ["done", false], ["created_at", "2021-09-16 23:36:20.770722"], ["updated_at", "2021-09-16 23:36:20.770722"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mTodoItem Create (0.7ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "TodoItem4"], ["body", "TodoItem4Body"], ["done", false], ["created_at", "2021-09-16 23:36:20.772844"], ["updated_at", "2021-09-16 23:36:20.772844"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mTodoItem Create (0.5ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "TodoItem5"], ["body", "TodoItem5Body"], ["done", false], ["created_at", "2021-09-16 23:36:20.777064"], ["updated_at", "2021-09-16 23:36:20.777064"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mTodoItem Create (0.4ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "TodoItem6"], ["body", "TodoItem6Body"], ["done", false], ["created_at", "2021-09-16 23:36:20.780460"], ["updated_at", "2021-09-16 23:36:20.780460"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+Started GET "/" for ::1 at 2021-09-16 16:36:59 -0700
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/joshkim/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 998ms (Views: 997.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todo_items" for ::1 at 2021-09-16 16:39:32 -0700
+
+ActionController::RoutingError - uninitialized constant Api::TodoItemsController:
+
+Started GET "/api/todo_items" for ::1 at 2021-09-16 16:39:50 -0700
+
+ActionController::RoutingError - uninitialized constant Api::TodoItemsController:
+
+Started POST "/__better_errors/19c8bf55924d7f75/variables" for ::1 at 2021-09-16 16:39:50 -0700
+Started GET "/api/todo_items" for ::1 at 2021-09-16 16:40:24 -0700
+
+ActionController::RoutingError - uninitialized constant Api::TodoItemsController:
+
+Started POST "/__better_errors/4d4ed1b8a5b11c6e/variables" for ::1 at 2021-09-16 16:40:24 -0700
+Started GET "/" for ::1 at 2021-09-16 16:59:41 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 393ms (Views: 392.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 16:59:43 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 34ms (Views: 33.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 16:59:50 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 34ms (Views: 33.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 16:59:52 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 29ms (Views: 28.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 17:01:54 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 34ms (Views: 33.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 17:03:42 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 58ms (Views: 57.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todo_items" for ::1 at 2021-09-16 17:04:57 -0700
+
+ActionController::RoutingError - uninitialized constant Api::TodoItemsController:
+
+Started GET "/" for ::1 at 2021-09-16 17:14:53 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 36ms (Views: 35.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todo_items" for ::1 at 2021-09-16 17:15:06 -0700
+Processing by Api::TodoItemsController#index as */*
+  Parameters: {"default"=>{"format"=>:json}}
+  [1m[36mTodoItem Load (1.3ms)[0m  [1m[34mSELECT "todo_items".* FROM "todo_items"[0m
+  ↳ app/controllers/api/todo_items_controller.rb:17
+Completed 200 OK in 31ms (Views: 12.2ms | ActiveRecord: 14.2ms)
+
+
+Started GET "/api/todo_item/1" for ::1 at 2021-09-16 17:16:26 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/api/todo_item/1"):
+  
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/todo_items/1" for ::1 at 2021-09-16 17:16:45 -0700
+Processing by Api::TodoItemsController#show as */*
+  Parameters: {"default"=>{"format"=>:json}, "id"=>"1"}
+  [1m[36mTodoItem Load (0.3ms)[0m  [1m[34mSELECT  "todo_items".* FROM "todo_items" WHERE "todo_items"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/todo_items_controller.rb:4
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/api/todo_items" for ::1 at 2021-09-16 17:17:52 -0700
+Processing by Api::TodoItemsController#create as */*
+  Parameters: {"title"=>"test8", "body"=>"test8body", "done"=>"false", "default"=>{"format"=>:json}}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: todo_items:
+  app/controllers/api/todo_items_controller.rb:42:in `todo_params'
+  app/controllers/api/todo_items_controller.rb:8:in `create'
+
+Started POST "/api/todo_items" for ::1 at 2021-09-16 17:18:50 -0700
+Processing by Api::TodoItemsController#create as */*
+  Parameters: {"title"=>"test8", "body"=>"test8body", "done"=>"false", "default"=>{"format"=>:json}}
+Completed 400 Bad Request in 4ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: todo_item:
+  app/controllers/api/todo_items_controller.rb:42:in `todo_params'
+  app/controllers/api/todo_items_controller.rb:8:in `create'
+
+Started GET "/" for ::1 at 2021-09-16 17:20:36 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 42ms (Views: 41.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 17:20:41 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 34ms (Views: 33.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/todo_items" for ::1 at 2021-09-16 17:20:56 -0700
+Processing by Api::TodoItemsController#create as */*
+  Parameters: {"title"=>"test8", "body"=>"test8body", "done"=>"false", "default"=>{"format"=>:json}}
+Completed 400 Bad Request in 6ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: todo_item:
+  app/controllers/api/todo_items_controller.rb:42:in `todo_item_params'
+  app/controllers/api/todo_items_controller.rb:8:in `create'
+
+Started POST "/api/todo_items" for ::1 at 2021-09-16 17:21:59 -0700
+Processing by Api::TodoItemsController#create as */*
+  Parameters: {"todo_item"=>{"title"=>"test8", "body"=>"test8body", "done"=>"false"}, "default"=>{"format"=>:json}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todo_items_controller.rb:9
+  [1m[36mTodoItem Create (0.6ms)[0m  [1m[32mINSERT INTO "todo_items" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "test8"], ["body", "test8body"], ["done", false], ["created_at", "2021-09-17 00:21:59.953877"], ["updated_at", "2021-09-17 00:21:59.953877"]]
+  ↳ app/controllers/api/todo_items_controller.rb:9
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todo_items_controller.rb:9
+Completed 200 OK in 23ms (Views: 0.6ms | ActiveRecord: 12.8ms)
+
+
+Started GET "/api/todo_items" for ::1 at 2021-09-16 17:22:09 -0700
+Processing by Api::TodoItemsController#index as */*
+  Parameters: {"default"=>{"format"=>:json}}
+  [1m[36mTodoItem Load (0.6ms)[0m  [1m[34mSELECT "todo_items".* FROM "todo_items"[0m
+  ↳ app/controllers/api/todo_items_controller.rb:17
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/api/todo_items/8" for ::1 at 2021-09-16 17:22:47 -0700
+Processing by Api::TodoItemsController#destroy as */*
+  Parameters: {"default"=>{"format"=>:json}, "id"=>"8"}
+  [1m[36mTodoItem Load (0.5ms)[0m  [1m[34mSELECT  "todo_items".* FROM "todo_items" WHERE "todo_items"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/api/todo_items_controller.rb:30
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todo_items_controller.rb:32
+  [1m[36mTodoItem Destroy (0.6ms)[0m  [1m[31mDELETE FROM "todo_items" WHERE "todo_items"."id" = $1[0m  [["id", 8]]
+  ↳ app/controllers/api/todo_items_controller.rb:32
+  [1m[35m (5.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todo_items_controller.rb:32
+Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 7.1ms)
+
+
+Started GET "/api/todo_items" for ::1 at 2021-09-16 17:22:52 -0700
+Processing by Api::TodoItemsController#index as */*
+  Parameters: {"default"=>{"format"=>:json}}
+  [1m[36mTodoItem Load (0.4ms)[0m  [1m[34mSELECT "todo_items".* FROM "todo_items"[0m
+  ↳ app/controllers/api/todo_items_controller.rb:17
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 17:23:40 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 27ms (Views: 26.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2021-09-16 17:25:08 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 365ms (Views: 364.7ms | ActiveRecord: 0.0ms)
+
+
