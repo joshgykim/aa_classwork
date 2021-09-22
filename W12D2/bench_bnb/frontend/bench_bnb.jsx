@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ApiUtil from "./util/session_api_util"
+import configureStore from "./store/store"
 
 document.addEventListener("DOMContentLoaded", () => {
   window.signup = ApiUtil.signup
